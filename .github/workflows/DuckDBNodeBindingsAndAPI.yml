@@ -274,50 +274,50 @@ jobs:
   #         YOUR_USERNAME: ${{ secrets.YOUR_USERNAME }}
 
   # windows_x64:
-  #   name: Windows x64
-  #   runs-on: windows-latest
-  #   if: ${{ inputs.windows_x64 }}
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+    name: Windows x64
+    runs-on: windows-latest
+    if: ${{ inputs.windows_x64 }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20'
-  #         registry-url: 'https://registry.npmjs.org/'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
 
-  #     - uses: pnpm/action-setup@v3
-  #       with:
-  #         version: 9
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
-  #     - name: Workspace - Install
-  #       run: pnpm install --ignore-scripts
+      - name: Workspace - Install
+        run: pnpm install --ignore-scripts
 
-  #     - name: Bindings - Build
-  #       working-directory: bindings
-  #       run: pnpm run build
+      - name: Bindings - Build
+        working-directory: bindings
+        run: pnpm run build
 
-  #     - name: Bindings - Test
-  #       working-directory: bindings
-  #       run: pnpm test
+      - name: Bindings - Test
+        working-directory: bindings
+        run: pnpm test
 
-  #     - name: API - Build
-  #       working-directory: api
-  #       run: pnpm run build
+      - name: API - Build
+        working-directory: api
+        run: pnpm run build
 
-  #     # - name: API - Test
-  #     #   working-directory: api
-  #     #   run: pnpm test
+      # - name: API - Test
+      #   working-directory: api
+      #   run: pnpm test
 
-  #     - name: Git Status
-  #       if: ${{ inputs.publish }}
-  #       run: git status
+      - name: Git Status
+        if: ${{ inputs.publish }}
+        run: git status
 
-  #     - name: Publish - Bindings - Win32 x64
-  #       if: ${{ inputs.publish }}
-  #       working-directory: bindings/pkgs/@databrainhq/node-bindings-win32-x64
-  #       run: pnpm publish ${{ inputs.publish_dry_run && '--dry-run' || '' }} --publish-branch ${{ github.ref_name }}
-  #       env:
-  #         NPM_AUTH_TOKEN: ${{ secrets.DUCKDB_NPM_TOKEN }}
-  #         YOUR_USERNAME: ${{ secrets.YOUR_USERNAME }}
+      - name: Publish - Bindings - Win32 x64
+        if: ${{ inputs.publish }}
+        working-directory: bindings/pkgs/@databrainhq/node-bindings-win32-x64
+        run: pnpm publish ${{ inputs.publish_dry_run && '--dry-run' || '' }} --publish-branch ${{ github.ref_name }}
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.DUCKDB_NPM_TOKEN }}
+          YOUR_USERNAME: ${{ secrets.YOUR_USERNAME }}
